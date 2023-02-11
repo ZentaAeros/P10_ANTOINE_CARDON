@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 
 # Create your models here.
-types = [
+TYPES = [
     ("backend", "backend"),
     ("frontend", "frontend"),
     ("android", "android"),
@@ -20,17 +20,17 @@ roles = [("author", "author"), ("contributor", "contributor")]
 
 class Project(models.Model):
     title = models.CharField(max_length=500)
-    description = models.CharField(max_length=1000)
-    types = models.CharField(choices=types, max_length=10)
-    author_user_id = models.ForeignKey(
+    description = models.TextField(max_length=1000)
+    type = models.CharField(choices=TYPES, max_length=10)
+    author = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="author"
     )
 
 
 class Contributor(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    project_id = models.ForeignKey(
-        to=Project, on_delete=models.CASCADE, related_name="contributor"
+    project = models.ForeignKey(
+        to=Project, on_delete=models.CASCADE, related_name="contributors"
     )
     role = models.CharField(choices=roles, max_length=15)
 
@@ -50,9 +50,9 @@ class Issue(models.Model):
 
 
 class Comment(models.Model):
-    comment_id = models.IntegerField()
     description = models.CharField(max_length=1000)
-    author_user_id = models.ForeignKey(
+    author = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
-    issue_id = models.ForeignKey(to=Issue, on_delete=models.CASCADE)
+    issue = models.ForeignKey(to=Issue, on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_now_add=True)
