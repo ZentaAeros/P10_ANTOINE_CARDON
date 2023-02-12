@@ -16,18 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from projects.views import project, project_details, contributors, contributor_detail, issue, issue_detail, comment
+from projects.views import project, project_details, contributors, contributor_detail, issue, issue_detail, comment, comment_detail
+from users.views import SignupView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
+    path("api/signup/", SignupView.as_view(), name="signup"),
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/token/refresh", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/projects/", project, name="project"),
-    path("api/projects/<int:project_pk>/", project_details),
-    path("api/projects/<int:project_pk>/contributors/", contributors),
-    path("api/projects/<int:project_pk>/contributors/<int:contributor_pk>/", contributor_detail),
-    path("api/projects/<int:project_pk>/issues/", issue),
-    path('api/projects/<int:project_pk>/issues/<int:issue_pk>/', issue_detail),
-    path('api/projects/<int:project_pk>/issues/<int:issue_pk>/comments/', comment),
+    path("api/projects/<int:project_pk>/", project_details, name="project_details"),
+    path("api/projects/<int:project_pk>/contributors/", contributors, name="contributors"),
+    path("api/projects/<int:project_pk>/contributors/<int:contributor_pk>/", contributor_detail, name="contributors_details"),
+    path("api/projects/<int:project_pk>/issues/", issue, name="issues"),
+    path('api/projects/<int:project_pk>/issues/<int:issue_pk>/', issue_detail, name="issues_details"),
+    path('api/projects/<int:project_pk>/issues/<int:issue_pk>/comments/', comment, name="comment"),
+    path('api/projects/<int:project_pk>/issues/<int:issue_pk>/comments/<int:comment_pk>/', comment_detail, name="comment_details"),
 ]
