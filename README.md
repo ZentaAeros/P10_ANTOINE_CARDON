@@ -13,3 +13,7 @@ Bienvenue dans cette API conçue avec Django Rest Framework !
 
 ## Guide d'utilisation de l'application :
 Retrouvez tous les endpoints sur https://documenter.getpostman.com/view/20095524/2s935uGgEt#intro
+
+|   Endpoint   |   Arguments |   Description |
+|:-:           |:-:          |:-:            |
+|http://127.0.0.1:8000/api/token/| username, password | Permet d'obtenir un token pour accéder à l'application            |
