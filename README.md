@@ -15,7 +15,7 @@ Bienvenue dans cette API conçue avec Django Rest Framework !
 Retrouvez tous les endpoints sur https://documenter.getpostman.com/view/20095524/2s935uGgEt#intro
 
 |   Endpoint   |  Méthode |   Description |
-|---           |:-:          |:-:            |
+|---           |---          |---            |
 |http://127.0.0.1:8000/api/token/| POST | Permet d'obtenir un token pour accéder à l'application            |
 |http://127.0.0.1:8000/api/signup/| POST | Permet de créer un compte pour accéder à l'application            |
 |http://127.0.0.1:8000/api/projects/| POST | Permet de créer un projet            |
